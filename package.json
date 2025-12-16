@@ -6,6 +6,7 @@
 	"scripts": {
 		"dev": "react-router dev",
 		"build": "react-router typegen && tsc -b && react-router build",
+		"postbuild": "node scripts/postbuild.mjs",
 		"start": "npx serve build/client",
 		"lint": "eslint .",
 		"preview": "npx serve build/client"
