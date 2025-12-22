@@ -64,8 +64,7 @@ export default function BlogIndex() {
 				<Form
 					className="flex flex-wrap gap-4"
 					method="get"
-					action={ROUTES.BLOG}
-				>
+					action={ROUTES.BLOG}>
 					{CATEGORIES.map((category) => {
 						return (
 							<Chip
@@ -84,8 +83,8 @@ export default function BlogIndex() {
 					{filteredList?.length === 0 && (
 						<li className="col-span-2 grid min-h-[20rem] place-items-center rounded-lg border border-solid border-gray-400 p-8 text-center text-3xl font-medium dark:border-current">
 							<FaceFrownIcon className="h-16 w-16" />
-							Couldn't find anything with the selected categories! Sorry
-							about that. Try another combination.
+							Couldn't find anything with the selected categories!
+							Sorry about that. Try another combination.
 						</li>
 					)}
 					{filteredList
@@ -106,8 +105,7 @@ export default function BlogIndex() {
 						<button
 							className="mx-auto flex items-center gap-2 rounded-full border border-solid border-gray-400 px-6 py-4 text-3xl transition-colors dark:border-current hover:dark:text-active"
 							onClick={handleLoadMore}
-							type="button"
-						>
+							type="button">
 							Load more <PlusIcon className="h-8 w-8" />
 						</button>
 					</>

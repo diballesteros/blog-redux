@@ -1,73 +1,30 @@
-# React + TypeScript + Vite
+# blog-redux
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Static blog built with React Router v7 framework mode (`ssr: false` + `prerender`). Posts are sourced at build time from the sibling repo `../blog-posts`.
 
-Currently, two official plugins are available:
+## Local development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Install: `npm install`
+- Dev server: `npm run dev`
+- Lint: `npm run lint`
+- Build (generates static output in `build/client`): `npm run build`
+- Preview static build: `npm run preview`
 
-## React Compiler
+### Content source
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+By default, the build reads markdown from `../blog-posts`. You can override this with:
 
-## Expanding the ESLint configuration
+- `BLOG_POSTS_DIR=/absolute/path/to/blog-posts`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Only posts with `published: true` in frontmatter are listed and prerendered.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Deploying to GitHub Pages (Project Pages)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+This repo is set up for GitHub **Project Pages** (site lives under `/<repo>/`).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- React Router base path: `RR_BASENAME=/<repo>`
+- Vite base path: `VITE_BASE=/<repo>/`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The workflow in `.github/workflows/deploy.yml` builds and deploys `build/client`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+In your repo settings, set **Pages** source to **GitHub Actions**.
