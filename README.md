@@ -25,6 +25,8 @@ This repo is set up for GitHub **Project Pages** (site lives under `/<repo>/`).
 - React Router base path: `RR_BASENAME=/<repo>`
 - Vite base path: `VITE_BASE=/<repo>/`
 
+For local testing, copy `.env.example` to `.env.local` and adjust `RR_BASENAME` / `VITE_BASE` to match your repo name.
+
 The workflow in `.github/workflows/deploy.yml` builds and deploys `build/client`.
 
 In your repo settings, set **Pages** source to **GitHub Actions**.
