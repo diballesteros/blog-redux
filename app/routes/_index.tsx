@@ -1,3 +1,4 @@
+import type { MetaFunction } from "react-router";
 import { Link, useLoaderData } from "react-router";
 
 import { getAllPublishedPostMetas } from "../utils/posts.server";
@@ -5,6 +6,29 @@ import Hero from "../components/Hero";
 import PostPreview from "../components/PostPreview";
 import Spacer from "../components/Spacer";
 import { H2 } from "../components/Typography";
+
+const SITE_TITLE = "Relatable Code";
+const SITE_DESCRIPTION =
+	"Relatable tutorials, news, and analysis centering around web development, React, CSS, HTML, JavaScript, and TypeScript.";
+
+export const meta: MetaFunction = () => [
+	{ title: SITE_TITLE },
+	{ name: "description", content: SITE_DESCRIPTION },
+	{
+		name: "keywords",
+		content:
+			"relatable, tutorials, news, analysis, web development, react, css, html, javascript, typescript",
+	},
+	{ property: "og:title", content: SITE_TITLE },
+	{ property: "og:description", content: SITE_DESCRIPTION },
+	{ property: "og:type", content: "website" },
+	{ property: "og:locale", content: "en_US" },
+	{ name: "twitter:card", content: "summary_large_image" },
+	{ name: "twitter:site", content: "@relatablecoder" },
+	{ name: "twitter:creator", content: "@relatablecoder" },
+	{ name: "twitter:title", content: SITE_TITLE },
+	{ name: "twitter:description", content: SITE_DESCRIPTION },
+];
 
 export async function loader() {
 	const posts = await getAllPublishedPostMetas();

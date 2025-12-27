@@ -1,3 +1,4 @@
+import type { MetaFunction } from "react-router";
 import {
 	data,
 	isRouteErrorResponse,
@@ -15,6 +16,36 @@ import {
 import PostPreview from "../components/PostPreview";
 import Spacer from "../components/Spacer";
 import { H2 } from "../components/Typography";
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+	if (!data || !("post" in data)) {
+		return [{ title: "404 - Post Not Found | Relatable Code" }];
+	}
+
+	const { post } = data;
+	const title = `${post.title} | Relatable Code`;
+
+	return [
+		{ title },
+		{ name: "description", content: post.description },
+		{ name: "keywords", content: post.categories?.join(", ") },
+		{ property: "og:title", content: post.title },
+		{ property: "og:description", content: post.description },
+		{ property: "og:type", content: "article" },
+		{ property: "og:locale", content: "en_US" },
+		...(post.coverImage
+			? [{ property: "og:image", content: post.coverImage }]
+			: []),
+		{ name: "twitter:card", content: "summary_large_image" },
+		{ name: "twitter:site", content: "@relatablecoder" },
+		{ name: "twitter:creator", content: "@relatablecoder" },
+		{ name: "twitter:title", content: post.title },
+		{ name: "twitter:description", content: post.description },
+		...(post.coverImage
+			? [{ name: "twitter:image", content: post.coverImage }]
+			: []),
+	];
+};
 
 export async function loader({
 	params,

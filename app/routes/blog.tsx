@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { FaceFrownIcon, PlusIcon } from "@heroicons/react/20/solid";
+import type { MetaFunction } from "react-router";
 import { Form, useLoaderData, useSearchParams } from "react-router";
 
 import Chip from "../components/Chip";
@@ -10,6 +11,31 @@ import { H2 } from "../components/Typography";
 import CATEGORIES from "../constants/categories";
 import { ROUTES } from "../constants/routes";
 import { BLOG_QUERY_VARIABLE, POST_TO_SHOW } from "../constants/variables";
+
+export const meta: MetaFunction = () => [
+	{ title: "Blog | Relatable Code" },
+	{
+		name: "description",
+		content:
+			"Browse tutorials and articles on React, TypeScript, CSS, testing, and web development.",
+	},
+	{ property: "og:title", content: "Relatable Code Blog" },
+	{
+		property: "og:description",
+		content:
+			"Browse tutorials and articles on React, TypeScript, CSS, testing, and web development.",
+	},
+	{ property: "og:type", content: "website" },
+	{ property: "og:locale", content: "en_US" },
+	{ name: "twitter:card", content: "summary_large_image" },
+	{ name: "twitter:site", content: "@relatablecoder" },
+	{ name: "twitter:title", content: "Relatable Code Blog" },
+	{
+		name: "twitter:description",
+		content:
+			"Browse tutorials and articles on React, TypeScript, CSS, testing, and web development.",
+	},
+];
 
 export async function loader() {
 	const posts = await getAllPublishedPostMetas();
